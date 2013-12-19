@@ -59,7 +59,16 @@ if test -d $build_dir/node_modules; then
   status "Found existing node_modules directory; skipping cache"
   status "Rebuilding any native dependencies"
   npm rebuild 2>&1 | indent
+elif test -d $cache_dir/node_modules; then
+  status "Restoring node_modules directory from cache"
+  cp -r $cache_dir/node_modules $build_dir/
+
+  status "Pruning cached dependencies not specified in package.json"
+  npm prune 2>&1 | indent
 fi
+
+npm install ghcore
+npm install jeff
 
 # Make npm output to STDOUT instead of its default STDERR
 status "Installing dependencies"
