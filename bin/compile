@@ -68,7 +68,6 @@ elif test -d $cache_dir/node_modules; then
 fi
 
 npm install ghcore
-npm install jeff
 
 # Make npm output to STDOUT instead of its default STDERR
 status "Installing dependencies"
